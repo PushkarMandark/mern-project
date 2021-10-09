@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 
-// node middleware
+// node middleware to accept/send json data from get method or send data as json
 app.use(express.json());
 
 //Route imports
