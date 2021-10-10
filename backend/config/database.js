@@ -9,8 +9,7 @@ function ConnectDatabase() {
     })
     .then((data) =>
       console.log(`mongoo db connected to server ${data.connection.host}`)
-    )
-    .catch((err) => console.log(err));
+    );
 }
 
 module.exports = ConnectDatabase;
