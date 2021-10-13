@@ -19,7 +19,8 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 exports.getAllProducts = catchAsyncError(async (req, res) => {
   const apifeature = new ApiFeatures(Product.find(), req.query)
     .search()
-    .filter();
+    .filter()
+    .pagination(5);
   //Mongodb Query for fetching all products
   const products = await apifeature.query;
 
@@ -30,6 +31,7 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
 });
 
 //************** Update product -- Admin Route**************
+// using catchAsyncError to catch error alternative to using try catch
 exports.updateProducts = catchAsyncError(async (req, res, next) => {
   if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
     // this is to check weather passed id in url is valid ObjectID
