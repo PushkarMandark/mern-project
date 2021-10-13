@@ -20,13 +20,27 @@ class ApiFeatures {
 
   filter() {
     const queryCopy = { ...this.queryStr };
-    console.log(queryCopy);
+
     // removing some filed for cateogry
     const removeFields = ["keyword", "page", "limit"];
 
     removeFields.forEach((key) => delete queryCopy[key]);
 
-    this.query = this.query.find(queryCopy);
+    // filter for price rating
+    let queryStr = JSON.stringify(queryCopy);
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
+
+    this.query = this.query.find(JSON.parse(queryStr));
+    return this;
+  }
+
+  pagination(resultPerPage) {
+    const currentPage = this.queryStr.page || 1;
+
+    const skip = resultPerPage * (currentPage - 1);
+
+    this.query = this.query.limit(resultPerPage).skip(skip);
+
     return this;
   }
 }
