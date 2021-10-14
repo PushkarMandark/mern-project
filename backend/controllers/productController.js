@@ -17,6 +17,8 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
 // ************** get all products Public Route **************
 exports.getAllProducts = catchAsyncError(async (req, res) => {
+  const resultPage = 5;
+  const productCount = await Product.countDocuments();
   const apifeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
@@ -93,6 +95,7 @@ exports.singleProduct = catchAsyncError(async (req, res, next) => {
     res.status(200).json({
       success: true,
       product,
+      productCount,
     });
   } else {
     return next(new ErrorHandler("Error Not Valid Object ID", 404));

@@ -1,0 +1,14 @@
+Dependecies Used in this project 
+
+ 1.    "bcryptjs": "^2.4.3",    ******* to incrypt the password of user in db so no one can access and sees it*******
+ 2.    "body-parser": "^1.19.0",  ******* to parse the data in body  It is responsible for parsing the incoming 
+                                    request bodies in a middleware before you handle it *******
+ 3.    "cookie-parser": "^1.4.5",  ******* to json webtoken we genrate will store in cookies ******* as storing in 
+                                    cookies dont make accessable to front end insted of localstorage
+ 4.    "dotenv": "^10.0.0",  ******* to use/read data from  .env file  *******
+ 5.    "express": "^4.17.1",  ******* to run server and connections *******
+ 6.   "jsonwebtoken": "^8.5.1",  ******* to manages/genrate user authentication token *******
+ 7.   "mongoose": "^6.0.9",  ******* mongodb database connection *******
+ 8.   "nodemailer": "^6.7.0",  ******* to send mail *******
+ 9.   "nodemon": "^2.0.13",  ******* to run node js webser without restarting again & again *******
+ 10.   "validator": "^13.6.0"  ******* to validate the user/ data fileds so data in particular field is same like email *******
