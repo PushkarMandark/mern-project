@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 });
 
-// wrk we can do before/pre saving user data like encypt pass using bcrypt
+// work we can do before/pre saving user data like encypt pass using bcrypt
 // insted of using () => {} as 2nd arrgument we used asyn function  as we use this and cannot use this in arrow function
 userSchema.pre("save", async function (next) {
   // we use if condition to check if user is updating his info not passowrd it shoud not encypt double his paassword only change when user udates his passowrd or make new profile
@@ -55,6 +55,10 @@ userSchema.methods.getJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = mongoose.model("User", userSchema);
