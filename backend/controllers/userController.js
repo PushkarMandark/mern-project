@@ -1,8 +1,9 @@
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const User = require("../models/userModles");
+const sendToken = require("../utils/jwtToken");
 
-// Register a user
+// **************  Register a user **************
 exports.registerUser = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -12,13 +13,10 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     password,
     avatar: { public_id: "this is a simple id", url: "profilepic url" },
   });
-
-  const token = user.getJwtToken();
-
-  res.status(201).json({ success: true, token });
+  sendToken(user, 200, res);
 });
 
-// user Login
+// **************  user Login **************
 
 exports.loginUser = catchAsyncError(async (req, res, next) => {
   const { email, password } = req.body;
@@ -44,6 +42,7 @@ exports.loginUser = catchAsyncError(async (req, res, next) => {
     );
   }
 
-  const token = user.getJwtToken();
-  res.status(201).json({ success: true, token });
+  sendToken(user, 200, res);
 });
+
+// ************** LogOut User **************
